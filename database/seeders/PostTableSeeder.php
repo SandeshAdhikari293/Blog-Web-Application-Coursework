@@ -20,5 +20,8 @@ class PostTableSeeder extends Seeder
         $p->content = "This is an example post";
         $p->user_id = 1;
         $p->save();
+
+        Post::factory()->count(50)->create();
+
     }
 }
