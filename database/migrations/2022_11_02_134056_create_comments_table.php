@@ -17,6 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('text')
             $table->dateTime('creation_time')
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('post_id')->unsigned();
+
+            $table->foreign('user_id')->references('id')->on("users")
+                ->onDelete("cascade")->onUpdate('cascade');
+
+            $table->foreign('post_id')->references('id')->on("posts")
+                ->onDelete("cascade")->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
