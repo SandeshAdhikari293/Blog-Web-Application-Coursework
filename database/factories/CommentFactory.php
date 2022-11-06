@@ -19,8 +19,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
-            'post_id' => Post::all()->random()->id,
+            'user_id' => User::all()->random()->id, //gets a valid, random user_id and post_id
+            'post_id' => Post::all()->random()->id, //from existing instances in the database
             'text' => fake()->sentence(2),
         ];
     }

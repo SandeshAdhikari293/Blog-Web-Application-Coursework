@@ -12,7 +12,7 @@ class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
+     * 
      * @return array<string, mixed>
      */
     public function definition()
@@ -20,7 +20,7 @@ class PostFactory extends Factory
         return [
              'title' => fake()->sentence(2),
              'content' => fake()->paragraph(3),
-             'user_id' => User::all()->random()->id,
+             'user_id' => User::all()->random()->id, //gets a valid user id from existing instances in the database
         ];
     }
 }

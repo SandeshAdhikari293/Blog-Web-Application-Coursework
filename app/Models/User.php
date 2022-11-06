@@ -12,11 +12,17 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * Query the comments that the user has sent.
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * Query the posts that the user has uploaded.
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);

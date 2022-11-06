@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('post_id')->unsigned();
 
+            //Initialises the foreign key of user_id and post_id, using the cascade referential constraint
             $table->foreign('user_id')->references('id')->on("users")
                 ->onDelete("cascade")->onUpdate('cascade');
 

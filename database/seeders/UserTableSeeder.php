@@ -15,12 +15,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        //Hard-coded example of a user.
         $u = new User;
         $u->name = "Sandesh";
-        $u->email = "sandy.adhikari@outlook.com";
+        $u->email = "2035469@swansea.ac.uk";
         $u->password = "n/a";
         $u->save();
 
+        //Create 50 instances of fake data in the database.
         User::factory()->count(50)->create();
     }
 }

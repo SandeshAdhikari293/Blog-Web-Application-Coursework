@@ -15,12 +15,14 @@ class CommentTableSeeder extends Seeder
      */
     public function run()
     {
+        //Hard-coded example comment
         $c = new Comment();
         $c->text = "This is an example comment.";
         $c->user_id = 1;
         $c->post_id = 1;
         $c->save();
 
+        //Create 50 instances of fake data in the database.
         Comment::factory()->count(50)->create();
 
     }
