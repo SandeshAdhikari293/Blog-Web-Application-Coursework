@@ -1,0 +1,16 @@
+.post {
+    text-align: center;
+}
+.postbox {
+    width: 500px;
+    border: 8px solid green;
+    padding: 50px;
+    margin: 20px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.centre {
+    display: flex;
+    justify-content: center;
+}

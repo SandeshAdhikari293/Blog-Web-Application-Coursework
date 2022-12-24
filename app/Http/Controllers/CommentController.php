@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\User;
 use App\Models\Comment;
 
-
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('users.blog', ['posts' => $posts]);        
-    }
-    
-    public function create_new()
-    {
-        return view('users.create_new');        
+        //
     }
 
     /**
@@ -42,23 +33,24 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        
+        //dd($request['comment']);
         $validatedData = $request->validate([
-            'title' => 'required|max:16',
-            'content' => 'required|max:255'
+            'comment' => 'required|max:255',
         ]);
 
-        $post = new Post;
-        $post->title = $validatedData['title'];
-        $post->content = $validatedData['content'];
-        $post->user_id = \Auth::user()->id;
+        $comment = new Comment;
+        $comment->post_id = $id;
+        $comment->text = $validatedData['comment'];
+        $comment->user_id = \Auth::user()->id;
 
-        $post->save();
+        $comment->save();
 
-        session()->flash('message', 'Post was created');
+        session()->flash('message', 'Comment was created');
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', ['id' => $id]);
     }
 
     /**
@@ -69,18 +61,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        $user = User::findOrFail($post->user_id);
-        $comments = $post->comments;
-
-        return view('posts.show', ['post' => $post, 'user' => $user, 'comments' => $comments]);
-    }
-
-    public function user($id)
-    {
-        $user = User::findOrFail($id);
-
-        return view('posts.users', ['user' => $user]);
+        //
     }
 
     /**
