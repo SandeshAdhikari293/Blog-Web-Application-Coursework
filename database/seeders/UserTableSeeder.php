@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder
         $u->name = "Sandesh";
         $u->email = "2035469@swansea.ac.uk";
         $u->password = "n/a";
+        $u->is_admin = True;
         $u->save();
 
         //Create 50 instances of fake data in the database.
