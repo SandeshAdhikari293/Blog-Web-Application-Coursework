@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -44,10 +45,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $validatedData = $request->validate([
             'title' => 'required|max:16',
-            'content' => 'required|max:255'
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'content' => 'required|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $post = new Post;
@@ -55,12 +57,14 @@ class PostController extends Controller
         $post->content = $validatedData['content'];
         $post->user_id = \Auth::user()->id;
 
-        // if($request->hasFile('image')){
-        //     $image = $request->file('image');
-        //     $filename = time() . '.' . $image->getClientOriginalExtension();
-        //     Image::make($image)->resize(300, 300)->save( storage_path('/uploads/' . $filename ) );
-        //     $post->image = $filename;
-        // };
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            $request->image->move(public_path('image'), $filename);
+
+            $post->image = $filename;
+        };
 
         $post->save();
 

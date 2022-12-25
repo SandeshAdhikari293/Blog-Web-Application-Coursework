@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('content');
             $table->bigInteger("user_id")->unsigned();
+            $table->string('image')->default("");
 
             //Initialises the foreign key of user_id, using the cascade referential constraint
             $table->foreign('user_id')->references('id')->on('users')

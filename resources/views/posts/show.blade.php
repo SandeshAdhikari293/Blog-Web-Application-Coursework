@@ -11,6 +11,11 @@
     </form>
 
     <h2> {{$post->title}} </h2>
+    @if($post->image != "")
+
+        <img src="{{ url('image/'. $post->image) }}" alt="unavailable"/>
+        
+    @endif
     <p> {{$post->content}} </p>
 
     <p> Posted by {{$user->name}}</p>
@@ -23,6 +28,7 @@
                     <li> {{ $comment->text }} </li>
                     <br><br>
                     <li> Comment by <a href="{{ route('users.show', ['id' => $comment->user_id]) }}"> {{ $comment->user->name }} </a> </li>
+            
 
                     @if(auth()->user()->is_admin || auth()->user()->id == $user->id)
                         <form method="DELETE" action="{{ route('comments.destroy', ['p_id' => $post->id, 'c_id' => $comment->id]) }}">
