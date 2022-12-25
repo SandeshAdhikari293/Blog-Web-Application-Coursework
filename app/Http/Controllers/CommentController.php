@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Notifications\NewComment;
 
 class CommentController extends Controller
 {
@@ -49,6 +50,8 @@ class CommentController extends Controller
         $comment->save();
 
         session()->flash('message', 'Comment was created');
+
+        $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
 
         return redirect()->route('posts.show', ['id' => $id]);
     }

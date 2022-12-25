@@ -19,6 +19,9 @@
     <form method="POST" action="{{ route('posts.store') }}">
         @csrf
         <p>Title: <input type="text" name="title" value = "{{ old('title') }}"></p>
+        <label for="image">Upload an image..</label>
+        <input type="file" name="image">
+        <br>
         <label for="content">Content:</label>
         <br>
         <textarea id="content" name="content" rows="4" cols="50">{{ old('content') }}</textarea>

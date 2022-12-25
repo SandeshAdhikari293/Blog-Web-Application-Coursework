@@ -47,12 +47,20 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:16',
             'content' => 'required|max:255'
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $post = new Post;
         $post->title = $validatedData['title'];
         $post->content = $validatedData['content'];
         $post->user_id = \Auth::user()->id;
+
+        // if($request->hasFile('image')){
+        //     $image = $request->file('image');
+        //     $filename = time() . '.' . $image->getClientOriginalExtension();
+        //     Image::make($image)->resize(300, 300)->save( storage_path('/uploads/' . $filename ) );
+        //     $post->image = $filename;
+        // };
 
         $post->save();
 
