@@ -23,9 +23,29 @@
                     <li> {{ $comment->text }} </li>
                     <br><br>
                     <li> Comment by <a href="{{ route('users.show', ['id' => $comment->user_id]) }}"> {{ $comment->user->name }} </a> </li>
+
+                    @if(auth()->user()->is_admin || auth()->user()->id == $user->id)
+                        <form method="DELETE" action="{{ route('comments.destroy', ['p_id' => $post->id, 'c_id' => $comment->id]) }}">
+                            @csrf                
+                            <input type="submit" value="Delete comment">
+                        </form>
+                    @endif
+
                 </div>
             </ul>
     @endforeach
+    <br><br><br>
+
+    @if(auth()->user()->is_admin || auth()->user()->id == $user->id)
+
+        <form method="DELETE" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+            @csrf            
+            <input type="submit" value="Delete post">
+        </form>
+    @else
+        <p>not Admin log in</p>
+    @endif
+
     <br><br><br>
     @if ($errors->any())
         <div>
