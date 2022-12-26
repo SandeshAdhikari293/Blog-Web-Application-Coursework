@@ -16,10 +16,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($page)
     {
         $posts = Post::all();
-        return view('posts.index', ['posts' => $posts]);        
+        return view('posts.index', ['posts' => $posts, 'page' => $page]);        
     }
     
     public function create()
@@ -60,7 +60,7 @@ class PostController extends Controller
 
         session()->flash('message', 'Post was created');
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index', ['page' => 1]);
     }
 
     /**
@@ -119,6 +119,6 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('posts.index')->with('message', 'Post was deleted!');
+        return redirect()->route('posts.index', ['page' => 1])->with('message', 'Post was deleted!');
     }
 }

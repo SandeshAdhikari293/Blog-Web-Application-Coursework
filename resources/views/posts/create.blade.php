@@ -29,7 +29,7 @@
         <!-- <p>Content: <input type="text" name="content" value = "{{ old('content') }}"></p> -->
 
         <input type="submit" value="Submit">
-        <a href=" {{ route('posts.index') }}">Cancel</a>
+        <a href=" {{ route('posts.index', ['page' => 1]) }}">Cancel</a>
     </form>
 
 @endsection
