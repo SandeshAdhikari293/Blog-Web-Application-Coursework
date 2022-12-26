@@ -28,7 +28,7 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create_new'])->name('posts.create_new');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts/store', [PostController::class, 'store'])->name("posts.store");
 
 Route::get('/posts/{id}', [PostController::class, 'show'])->name("posts.show");
@@ -39,6 +39,7 @@ Route::post('/post/{id}/comment/store', [CommentController::class, 'store'])->na
 Route::post('/post/{id}/comment/store', [CommentController::class, 'store'])->name("comments.store");
 
 Route::get('/post/{id}', [PostController::class, 'destroy'])->name("posts.destroy");
+
 Route::get('/post/{p_id}/comment/{c_id}/destroy', [CommentController::class, 'destroy'])->name("comments.destroy");
 
 

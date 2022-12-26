@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('posts.create_new')" :active="request()->routeIs('posts.create_new')">
+                    <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create_new')">
                         {{ __('Create a new post') }}
                     </x-nav-link>
                 </div>

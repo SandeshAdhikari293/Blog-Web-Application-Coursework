@@ -19,22 +19,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('users.blog', ['posts' => $posts]);        
+        return view('posts.index', ['posts' => $posts]);        
     }
     
-    public function create_new()
-    {
-        return view('users.create_new');        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('posts.create');        
     }
 
     /**
