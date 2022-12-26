@@ -6,6 +6,14 @@
     <p> {{$user->name}} </p>
     <p> {{$user->email}} </p>
     <br>
+    @if(auth()->user()->is_admin || auth()->user()->id == $user->id)
+
+    <form method="DELETE" action="{{ route('users.destroy', ['id' => $user->id]) }}">
+        @csrf            
+        <input type="submit" value="Delete User">
+    </form>
+    @endif
+    <br>
     <p>Posts</p>
     <div>      
         @foreach ($user->posts as $post)
