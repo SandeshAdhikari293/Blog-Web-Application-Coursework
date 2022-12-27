@@ -5,7 +5,7 @@
 @section('content')
     <link href='/css/main.css' rel='stylesheet'>
 
-    <form method="GET" action="{{ route('posts.index') }}">
+    <form method="GET" action="{{ route('posts.index', ['page' => 1]) }}">
         @csrf
         <button>Go back</button>
     </form>
@@ -75,7 +75,7 @@
             <p>Comment: <input type="text" name="comment" value = "{{ old('comment') }}"></p>
             
             <input type="submit" value="Submit">
-            <a href=" {{ route('posts.index') }}">Cancel</a>
+            <a href=" {{ route('posts.index', ['page' => 1]) }}">Cancel</a>
         </form>
     </div>
 
