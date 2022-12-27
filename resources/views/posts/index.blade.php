@@ -10,12 +10,9 @@
         $posts_per_page = 3;
     @endphp
     <!-- <link href='/css/main.css' rel='stylesheet'> -->
-    <p>View all posts</p>
     @if (session('message'))
         <p><b>{{session('message')}} </b></p>    
     @endif
-
-    <p class="text-3xl font-bold underline">test</p>
     @php
         $count = 0;
     @endphp
@@ -31,7 +28,7 @@
                     </div>
                 </ul> -->
                 <!-- post card -->
-<div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-56 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
+<div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-8 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
    <div class="flex items-start px-4 py-6">
         @if($post->image != "")
             <img width="200" height = "200" src="{{ url('image/'. $post->image) }}" alt="">
@@ -68,15 +65,9 @@
       </div>
    </div>
 </div>
-<br>
-            
-            @endif
+        @endif
             @php
                 $count = $count + 1;
             @endphp
         @endforeach
-
-        <button class="bg-blue" type = "button">
-            Button
-        </button>
 @endsection
