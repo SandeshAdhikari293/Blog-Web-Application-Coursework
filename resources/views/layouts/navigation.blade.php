@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('posts.users', ['id' => auth()->user()->id] )" :active="request()->routeIs('posts.users')">
+                    <x-nav-link :href="route('users.show', ['id' => auth()->user()->id] )" :active="request()->routeIs('posts.users')">
                         {{ __('My Posts') }}
                     </x-nav-link>
                 </div>
