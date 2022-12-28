@@ -48,7 +48,7 @@
                             <!-- <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
                                 </svg> -->
-                            <span>posted by {{$post->user->name}}</span>
+                            <span> <a href= "{{route('users.show', ['id' => $post->user->id, 'ppage' => 1, 'cpage' => 1])}}">posted by {{$post->user->name}} </a></span>
                             </div>
                         </div>
                     </div>
@@ -59,4 +59,16 @@
                 $count = $count + 1;
             @endphp
         @endforeach
+        <div class="inline-flex">
+            @if($page > 1)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                    <a href="{{route('posts.index', ['page' => $page - 1])}}">Prev</a>
+                </button>
+            @endif
+            @if($page < count($posts) / $posts_per_page)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                    <a href="{{route('posts.index', ['page' => $page + 1])}}">Next</a>
+                </button> 
+            @endif
+        </div>
 @endsection

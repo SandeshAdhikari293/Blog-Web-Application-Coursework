@@ -27,5 +27,16 @@
                 $count = $count + 1;
             @endphp
         @endforeach
-
+        <div class="inline-flex">
+            @if($page > 1)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                    <a href="{{route('users.index', ['page' => $page - 1])}}">Prev</a>
+                </button>
+            @endif
+            @if($page < count($users) / $posts_per_page)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                    <a href="{{route('users.index', ['page' => $page + 1])}}">Next</a>
+                </button> 
+            @endif
+        </div>
 @endsection

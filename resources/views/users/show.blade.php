@@ -31,7 +31,7 @@
         @endif
       <div class="">
          <div class="flex items-center justify-between">
-            <h2 class="text-lg font-semibold text-gray-900 -mt-1"> {{$post->title}}</h2>
+            <h2 class="text-lg font-semibold text-gray-900 -mt-1"> <a href="{{route('posts.show', ['id' => $post->id, 'page' => 1])}}">{{$post->title}}</a></h2>
             <small class="text-sm text-gray-700">22h ago</small>
          </div>
          <p class="text-gray-700"> </p>
@@ -69,16 +69,27 @@
                 $pcount = $pcount + 1;
             @endphp
         @endforeach
-
+    <div class="inline-flex">
+            @if($ppage > 1)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                <a href="{{route('users.show', ['id' => $user->id, 'ppage' => $ppage - 1, 'cpage' => $cpage])}}">Prev</a>
+                </button>
+            @endif
+            @if($ppage < count($user->posts) / $posts_per_page)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                <a href="{{route('users.show', ['id' => $user->id, 'ppage' => $ppage + 1, 'cpage' => $cpage])}}">Next</a>
+                </button> 
+            @endif
+        </div>
     </div>
     <br>
     <h1 class="flex justify-center b-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{$user->name}} 's <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">Comments</span></h1>
     <div>
         @foreach ($user->comments as $comment)
         @if($ccount < $cpage * $posts_per_page && $ccount > ($cpage * $posts_per_page) - ($posts_per_page + 1) )
-        <div class="p-20 bg-blue-100">
+        <div class="p-8 bg-blue-100">
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold mb-2 text-gray-800">{{$comment->post->title}}</h2>
+                <h2 class="text-2xl font-bold mb-2 text-gray-800"> <a href=" {{route('posts.show', ['id' => $comment->post->id, 'page' => 1])}}">{{$comment->post->title}}</a></h2>
                 <p class="text-gray-700">{{$comment->text}}</p>
             </div>
         </div>
@@ -94,5 +105,16 @@
     <br><br>
 
     @endif
-
+    <div class="inline-flex">
+            @if($cpage > 1)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                <a href="{{route('users.show', ['id' => $user->id, 'ppage' => $ppage, 'cpage' => $cpage - 1])}}">Prev</a>
+                </button>
+            @endif
+            @if($cpage < count($user->comments) / $posts_per_page)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                <a href="{{route('users.show', ['id' => $user->id, 'ppage' => $ppage, 'cpage' => $cpage + 1])}}">Next</a>
+                </button> 
+            @endif
+        </div>
 @endsection
