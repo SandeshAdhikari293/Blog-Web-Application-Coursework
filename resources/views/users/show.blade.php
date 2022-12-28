@@ -12,10 +12,11 @@
     @endphp
     <h1 class="flex justify-center b-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{$user->name . "'s "}} <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600"> Posts</span></h1>
     <br><br>
+    
     <form class= "flex justify-center" method="DELETE" action="{{ route('users.destroy', ['id' => $user->id]) }}">
         @csrf
-        <input type="submit" class="btn btn-danger delete-user" value="Delete user">            
-        <!-- <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete user</button> -->
+        <!-- <input type="submit" class="btn btn-danger delete-user" value="Delete user">             -->
+        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete user</button>
     </form>
     <br>
     @if(auth()->user()->is_admin || auth()->user()->id == $user->id)
