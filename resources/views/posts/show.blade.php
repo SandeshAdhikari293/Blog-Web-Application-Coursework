@@ -5,6 +5,10 @@
 @section('content')
     <link href='/css/main.css' rel='stylesheet'>
 
+    @php
+        $posts_per_page = 3;
+        $count = 0;
+    @endphp
     <form method="GET" action="{{ route('posts.index', ['page' => 1]) }}">
         @csrf
         <button>Go back</button>
@@ -17,7 +21,7 @@
                         @endif
                     <div class="">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-lg font-semibold text-gray-900 -mt-1"> <a href=" {{route('posts.show', ['id' => $post->id]) }}">{{$post->title}}</a></h2>
+                            <h2 class="text-lg font-semibold text-gray-900 -mt-1"> <a href=" {{route('posts.show', ['id' => $post->id, 'page' => 1]) }}">{{$post->title}}</a></h2>
                             <small class="text-sm text-gray-700">22h ago</small>
                         </div>
                         <p class="text-gray-700"> </p>
@@ -51,6 +55,8 @@
                 <h1 class="flex justify-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">View <span class="text-blue-600 dark:text-blue-500">Comments</span></h1>
                 <br>
                 @foreach($post->comments as $comment)
+                @if($count < $page * $posts_per_page && $count > ($page * $posts_per_page) - ($posts_per_page + 1) )
+
                 <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
                 <div class="flex items-start px-4 py-6">
                     <div class="">
@@ -69,7 +75,24 @@
                 </div>
                 <br>
                 </div>
+                @endif
+                @php
+                    $count = $count + 1
+                @endphp
                 @endforeach
+                <br>
+            <div class="inline-flex">
+            @if($page > 1)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                <a href="{{route('posts.show', ['id' => $post->id, 'page' => $page - 1])}}">Prev</a>
+                </button>
+            @endif
+            @if($page < count($post->comments) / $posts_per_page)
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                <a href="{{route('posts.show', ['id' => $post->id, 'page' => $page + 1])}}">Next</a>
+                </button> 
+            @endif
+        </div>
 <!-- 
     <div class="flex justify-center">
         <div class ="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">

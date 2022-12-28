@@ -62,9 +62,7 @@
       </div>
    </div>
 </div>
-            <!-- <ul>
-                <li> <a href="{{ route('posts.show', ['id' => $post->id]) }}"> {{ $post->title }} </a> </li> 
-            </ul> -->
+
             @endif
             @php
                 $pcount = $pcount + 1;
@@ -94,9 +92,6 @@
                 <p class="text-gray-700">{{$comment->text}}</p>
             </div>
         </div>
-            <!-- <ul>
-                <li> <a href="{{ route('posts.show', ['id' => $comment->post->id]) }}"> {{ $comment->post->title }} : {{$comment->text}} </a> </li> 
-            </ul> -->
             @endif
             @php
                 $ccount = $ccount + 1;

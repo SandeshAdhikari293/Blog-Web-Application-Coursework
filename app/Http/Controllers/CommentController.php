@@ -53,7 +53,7 @@ class CommentController extends Controller
 
         $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
 
-        return redirect()->route('posts.show', ['id' => $id]);
+        return redirect()->route('posts.show', ['id' => $id, 'page' => 1]);
     }
 
     /**
@@ -101,6 +101,6 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($c_id);
         $comment->delete();
 
-        return redirect()->route('posts.show', ['id' => $p_id])->with('message', 'Post was deleted!');
+        return redirect()->route('posts.show', ['id' => $p_id, 'page' => 1])->with('message', 'Post was deleted!');
     }
 }
