@@ -24,8 +24,8 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{id}/page/{ppage}/{cpage}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/page/{page}', [UserController::class, 'index'])->name('users.index');
 
 
 

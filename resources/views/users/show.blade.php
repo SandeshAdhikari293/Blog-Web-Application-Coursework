@@ -1,8 +1,15 @@
 @extends('layouts.app')
 
 @section('title', 'User Details')
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+@vite('resources/css/app.css')
 @section('content')
+    @php
+        $posts_per_page = 3;
+        $ccount = 0;
+        $pcount = 0;
+    @endphp
     <h1 class="flex justify-center b-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{$user->name . "'s "}} <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600"> Posts</span></h1>
     <br><br>
     <form class= "flex justify-center" method="DELETE" action="{{ route('users.destroy', ['id' => $user->id]) }}">
@@ -15,6 +22,8 @@
     <br>
     <div>      
         @foreach ($user->posts as $post)
+        @if($pcount < $ppage * $posts_per_page && $pcount > ($ppage * $posts_per_page) - ($posts_per_page + 1) )
+
         <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-8 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
    <div class="flex items-start px-4 py-6">
         @if($post->image != "")
@@ -55,6 +64,10 @@
             <!-- <ul>
                 <li> <a href="{{ route('posts.show', ['id' => $post->id]) }}"> {{ $post->title }} </a> </li> 
             </ul> -->
+            @endif
+            @php
+                $pcount = $pcount + 1;
+            @endphp
         @endforeach
 
     </div>
@@ -62,6 +75,7 @@
     <h1 class="flex justify-center b-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{$user->name}} 's <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">Comments</span></h1>
     <div>
         @foreach ($user->comments as $comment)
+        @if($ccount < $cpage * $posts_per_page && $ccount > ($cpage * $posts_per_page) - ($posts_per_page + 1) )
         <div class="p-20 bg-blue-100">
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-bold mb-2 text-gray-800">{{$comment->post->title}}</h2>
@@ -71,6 +85,10 @@
             <!-- <ul>
                 <li> <a href="{{ route('posts.show', ['id' => $comment->post->id]) }}"> {{ $comment->post->title }} : {{$comment->text}} </a> </li> 
             </ul> -->
+            @endif
+            @php
+                $ccount = $ccount + 1;
+            @endphp
         @endforeach
     </div>
     <br><br>

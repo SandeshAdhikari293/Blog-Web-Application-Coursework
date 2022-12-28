@@ -9,16 +9,16 @@ class UserController extends Controller
 {
     //
 
-    public function index()
+    public function index($page)
     {
         $users = User::all();
-        return view('users.index', ['users' => $users]);
+        return view('users.index', ['users' => $users, 'page' => $page]);
     }
 
-    public function show($id)
+    public function show($id, $ppage, $cpage)
     {
         $user = User::findOrFail($id);
-        return view('users.show', ['user' => $user]);
+        return view('users.show', ['user' => $user, 'ppage' => $ppage, 'cpage' => $cpage]);
     }
     /**
      * Show the form for editing the specified resource.

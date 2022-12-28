@@ -30,7 +30,7 @@
                     <div style="width:500px;height:100px;border:1px solid #000;">
                         <li> {{ $comment->text }} </li>
                         <br><br>
-                        <li> Comment by <a href="{{ route('users.show', ['id' => $comment->user_id]) }}"> {{ $comment->user->name }} </a> </li>
+                        <li> Comment by <a href="{{ route('users.show', ['id' => $comment->user_id, 'ppage' => 1, 'cpage' => 1]) }}"> {{ $comment->user->name }} </a> </li>
                 
 
                         @if(auth()->user()->is_admin || auth()->user()->id == $user->id)
