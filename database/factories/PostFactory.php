@@ -19,7 +19,7 @@ class PostFactory extends Factory
     {
         return [
              'title' => fake()->sentence(2),
-             'content' => fake()->paragraph(3),
+             'content' => fake()->paragraph(2),
              'user_id' => User::all()->random()->id, //gets a valid user id from existing instances in the database
         ];
     }

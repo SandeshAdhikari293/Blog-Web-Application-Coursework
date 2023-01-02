@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 //Comment to test git
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,10 +13,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function upvotes(){
+        return $this->belongsToMany(Post::class);
     }
 
     /**
