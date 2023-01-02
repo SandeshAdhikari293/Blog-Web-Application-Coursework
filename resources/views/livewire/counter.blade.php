@@ -1,4 +1,41 @@
 <div>
+    <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-8 max-w-md md:max-w-2xl">
+        <div class="flex items-start px-4 py-6">
+            @if($post->image != "")
+                <img width="200" height = "200" src="{{ url('image/'. $post->image) }}" alt="">
+            @endif
+            <div class="">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900 -mt-1"> <a href=" {{route('posts.show', ['id' => $post->id, 'page' => 1]) }}">{{$post->title}}</a></h2>
+                    <small class="text-sm text-gray-700">22h ago</small>
+                </div>
+                <p class="text-gray-700"> </p>
+                <p class="mt-3 text-gray-700 text-sm">
+                    {{$post->content}}
+                </p>
+                <div class="mt-4 flex items-center">
+                    <div class="flex mr-2 text-gray-700 text-sm mr-3">
+                        <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                        <span>{{$upvotes}}</span>
+                    </div>
+                    <div class="flex mr-2 text-gray-700 text-sm mr-8">
+                        <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                        </svg>
+                        <span>{{count($post->comments)}}</span>
+                    </div>
+                    <button type="submit" wire:click="upvote" id="btn-submit" name="btn-submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 btn-submit">Upvote</button>
+
+                    <div class="flex mr-2 text-gray-700 text-sm mr-4">
+                        <span> <a href= "{{route('users.show', ['id' => $post->user->id, 'ppage' => 1, 'cpage' => 1])}}">posted by {{$post->user->name}} </a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="block bg-gray shadow-lg">
 
         <br>
