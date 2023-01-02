@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string("avatar")->nullable();
+            $table->string("bio")->nullable();
+            $table->dateTime("dob")->nullable();
+            $table->string("job")->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

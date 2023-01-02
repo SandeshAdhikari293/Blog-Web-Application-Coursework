@@ -12,6 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     /**
      * Query the comments that the user has sent.
      */
