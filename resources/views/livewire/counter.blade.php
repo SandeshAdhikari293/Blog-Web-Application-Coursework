@@ -1,22 +1,37 @@
 <div>
-
+    @php
+        $count = 0;
+    @endphp
     @foreach($post->comments as $comment)
-        <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-4 max-w-md md:max-w-2xl ">
-            <div class="flex items-start px-4 py-6">
-                <div class="">
-                    <p class="text-lg font-semibold text-gray-900 -mt-1">
-                        {{$comment->text}}
-                    </p>
-                    <div class="mt-4 flex items-center">
-                         <div class="flex mr-2 text-gray-700 text-sm mr-4">
-                            <span> <a href= "{{route('users.show', ['id' => $post->user->id, 'ppage' => 1, 'cpage' => 1])}}">posted by {{$comment->user->name}} </a></span>
+        @if($count < $page * $comment_per_page && $count > ($page * $comment_per_page) - ($comment_per_page + 1) )
+            <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-4 max-w-md md:max-w-2xl ">
+                <div class="flex items-start px-4 py-6">
+                    <div class="">
+                        <p class="text-lg font-semibold text-gray-900 -mt-1">
+                            {{$comment->text}}
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex mr-2 text-gray-700 text-sm mr-4">
+                                <span> <a href= "{{route('users.show', ['id' => $post->user->id, 'ppage' => 1, 'cpage' => 1])}}">posted by {{$comment->user->name}} </a></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
-            <br>
-        </div>
+        @endif
+        @php
+            $count = $count + 1;
+        @endphp
     @endforeach
+    @if($page > 1)
+        <button wire:click="prev_page">Prev Page</button>
+    @endif
+    
+    @if($page < count($post->comments) / $comment_per_page)
+        <button wire:click="next_page">Next Page</button>
+    @endif
+
     <br>
     <div class="flex justify-center">
         <div class ="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">

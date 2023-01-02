@@ -11,6 +11,8 @@ class Counter extends Component
 {
     public $input;
     public $post;
+    public $page = 1;
+    public $comment_per_page = 3;
 
 
     public function post(){
@@ -24,6 +26,19 @@ class Counter extends Component
         $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
 
         $this->post = $comment->post;
+        $this->page = count($this->post->comments) / $this->comment_per_page;
+    }
+
+    public function next_page(){
+        $this->page = $this->page + 1;
+    }
+
+    public function prev_page(){
+        $this->page = $this->page - 1;
+    }
+    
+    public function max_pages(){
+        return count($this->post->comments) / $this->comment_per_page;
     }
 
     public function render()
