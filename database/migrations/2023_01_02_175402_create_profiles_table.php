@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string("bio")->nullable();
             $table->dateTime("dob")->nullable();
             $table->string("job")->nullable();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on("users")
+                ->onDelete("cascade")->onUpdate('cascade');
 
         });
     }
