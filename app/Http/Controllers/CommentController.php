@@ -34,27 +34,53 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
-    {
+    // public function store(Request $request, $id)
+    // {
         
-        //dd($request['comment']);
-        $validatedData = $request->validate([
-            'comment' => 'required|max:255',
+    //     //dd($request['comment']);
+    //     $validatedData = $request->validate([
+    //         'comment' => 'required|max:255',
+    //     ]);
+
+    //     $comment = new Comment;
+    //     $comment->post_id = $id;
+    //     $comment->text = $validatedData['comment'];
+    //     $comment->user_id = \Auth::user()->id;
+
+    //     $comment->save();
+    //     $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
+
+    //     session()->flash('message', 'Comment was created');
+
+
+    //     // return redirect()->route('posts.show', ['id' => $id, 'page' => 1]);
+    //     return response()->json(['success' => 'Post created successfully.']);
+    // }
+
+    public function store(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|max:255'
         ]);
+  
+        if ($validator->fails()) {
+            return response()->json([
+                        'error' => $validator->errors()->all()
+                    ]);
+        }
+       
+        // $comment = new Comment;
+        // $comment->post_id = $id;
+        // $comment->text = $request->comment;
+        // $comment->user_id = \Auth::user()->id;
 
-        $comment = new Comment;
-        $comment->post_id = $id;
-        $comment->text = $validatedData['comment'];
-        $comment->user_id = \Auth::user()->id;
-
-        $comment->save();
-
-        session()->flash('message', 'Comment was created');
-
-        $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
-
-        return redirect()->route('posts.show', ['id' => $id, 'page' => 1]);
+        // $comment->save();
+        // $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
+  
+        return response()->json(['success' => 'Product created successfully.']);
     }
+    
 
     /**
      * Display the specified resource.

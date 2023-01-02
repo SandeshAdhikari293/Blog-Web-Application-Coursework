@@ -24,6 +24,8 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::post('comments/{id}', [CommentController::class, 'store'])->name('comments.store');
+
 Route::get('/users/{id}/page/{ppage}/{cpage}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/page/{page}', [UserController::class, 'index'])->name('users.index');
 
@@ -36,9 +38,6 @@ Route::post('/posts/store', [PostController::class, 'store'])->name("posts.store
 Route::get('/posts/{id}/page/{page}', [PostController::class, 'show'])->name("posts.show");
 
 Route::get('/posts/user/{id}', [PostController::class, 'user'])->name("posts.users");
-
-Route::post('/post/{id}/comment/store', [CommentController::class, 'store'])->name("comments.store");
-Route::post('/post/{id}/comment/store', [CommentController::class, 'store'])->name("comments.store");
 
 Route::get('/post/{id}', [PostController::class, 'destroy'])->name("posts.destroy");
 

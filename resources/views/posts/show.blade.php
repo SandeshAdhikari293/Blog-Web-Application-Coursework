@@ -3,8 +3,11 @@
 @section('title', 'Post')
 
 @section('content')
-    <link href='/css/main.css' rel='stylesheet'>
-
+    <head>
+        @livewireStyles
+    </head>
+    <body>
+        @livewireScripts
     @php
         $posts_per_page = 3;
         $count = 0;
@@ -54,45 +57,7 @@
                 <br>
                 <h1 class="flex justify-center mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">View <span class="text-blue-600 dark:text-blue-500">Comments</span></h1>
                 <br>
-                @foreach($post->comments as $comment)
-                @if($count < $page * $posts_per_page && $count > ($page * $posts_per_page) - ($posts_per_page + 1) )
-
-                <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
-                <div class="flex items-start px-4 py-6">
-                    <div class="">
-                        <p class="text-lg font-semibold text-gray-900 -mt-1">
-                            {{$comment->text}}
-                        </p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex mr-2 text-gray-700 text-sm mr-4">
-                            <!-- <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                                </svg> -->
-                            <span> <a href= "{{route('users.show', ['id' => $post->user->id, 'ppage' => 1, 'cpage' => 1])}}">posted by {{$comment->user->name}} </a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                </div>
-                @endif
-                @php
-                    $count = $count + 1
-                @endphp
-                @endforeach
-                <br>
-            <div class="inline-flex">
-            @if($page > 1)
-                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-                <a href="{{route('posts.show', ['id' => $post->id, 'page' => $page - 1])}}">Prev</a>
-                </button>
-            @endif
-            @if($page < count($post->comments) / $posts_per_page)
-                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
-                <a href="{{route('posts.show', ['id' => $post->id, 'page' => $page + 1])}}">Next</a>
-                </button> 
-            @endif
-        </div>
+                
 <!-- 
     <div class="flex justify-center">
         <div class ="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -147,25 +112,26 @@
             </ul>
         </div>
     @endif
-    <div class="flex justify-center">
+    <!-- <div class="flex justify-center">
         <div class ="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <form method="POST" action="{{ route('comments.store', ['id' => $post->id]) }}">
                 @csrf
 
-                <!-- <textarea id="content" name="content" rows="4" cols="50">{{ old('content') }}</textarea> -->
-                <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add a comment to this post?</label>
-                <textarea name="comment" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your comment..">{{ old('content') }}</textarea>
+            <textarea id="content" name="content" rows="4" cols="50">{{ old('content') }}</textarea> -->
+            <!-- </form>
+            <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add a comment to this post?</label>
+                <textarea wire:model = "input" type ="text" name="comment" id="comment" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your comment..">{{ old('content') }}</textarea>
 
                 <br>
-                <!-- <p>Content: <input type="text" name="content" value = "{{ old('content') }}"></p> -->
+                <p>Content: <input type="text" name="content" value = "{{ old('content') }}"></p>
 
-                <!-- <input type="submit" value="Submit"> -->
+                <input type="submit" value="Submit">
                 <div class="flex justify-between">
-                    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Post comment</button>
+                    <button class="btn btn-success btn-submit">Submit</button>
+                    <button type="submit" wire:click="post(2)" id="btn-submit" name="btn-submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 btn-submit">Post comment</button>
                 </div>
-            </form>
-</div>
-</div>
+            </div>
+</div> -->
 <br><br>
     <!-- <div>
         <form method="POST" action="{{ route('comments.store', ['id' => $post->id]) }}">
@@ -176,5 +142,7 @@
             <a href=" {{ route('posts.index', ['page' => 1]) }}">Cancel</a>
         </form>
     </div> -->
-
+    @livewire('counter', ['post' => $post])
+    </body>
 @endsection
+
