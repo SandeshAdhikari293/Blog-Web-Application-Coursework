@@ -29,6 +29,8 @@ class UserTableSeeder extends Seeder
         $p->bio = "Hello everyone!";
         $p->save();
 
+        
+
         //Create 50 instances of fake data in the database.
         User::factory()->count(50)->create();
     }
