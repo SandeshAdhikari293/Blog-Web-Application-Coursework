@@ -14,16 +14,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
-    public function latestImage()
-    {
-        return $this->morphOne(Image::class, 'imageable')->latestOfMany();
-    }
-
     public function profile()
     {
         return $this->hasOne(Profile::class);
