@@ -37,6 +37,9 @@ Route::get('/posts/create', [PostController::class, 'create'])->name('posts.crea
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
 Route::post('/posts/edit/{id}/store', [PostController::class, 'store_edit'])->name('posts.edit.store');
 
+Route::get('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comments.edit');
+Route::post('/comment/edit/{id}/store', [CommentController::class, 'update'])->name('comments.edit.store');
+
 Route::post('/posts/store', [PostController::class, 'store'])->name("posts.store");
 Route::post('/users/profile/store', [UserController::class, 'store_profile'])->name("users.profile.store");
 

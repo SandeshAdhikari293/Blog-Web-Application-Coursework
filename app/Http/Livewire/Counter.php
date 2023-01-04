@@ -14,6 +14,7 @@ class Counter extends Component
     public $page = 1;
     public $comment_per_page = 3;
     public $upvotes;
+    public $edit_comment;
 
     public function post(){
         // dd($this->pid);
@@ -27,6 +28,10 @@ class Counter extends Component
 
         $this->post = $comment->post;
         $this->page = count($this->post->comments) / $this->comment_per_page;
+    }
+
+    public function edit(){
+
     }
 
     public function upvote(){

@@ -68,6 +68,12 @@
                                 <div class="flex mr-2 text-gray-700 text-sm mr-4">
                                     <span> <a href= "{{route('users.show', ['id' => $post->user->id, 'ppage' => 1, 'cpage' => 1])}}">posted by {{$comment->user->name}} </a></span>
                                 </div>
+                                @if(auth()->user()->is_admin || auth()->user()->id == $post->user->id)
+                                    <button type="button" class="text-white bg-orange-700 hover:bg-orange-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><a href = "{{route('comments.edit', ['id' => $comment->id])}}">Edit comment</button>
+                                    <form class= "flex justify-center" method="DELETE" action="{{ route('comments.destroy', ['c_id' => $comment->id, 'p_id' => $comment->post->id]) }}">
+                                        <button type="submit" id="btn-submit" name="btn-submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete comment</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -96,6 +102,7 @@
                     <br>
                     <div class="flex justify-between">
                         <button type="submit" wire:click="post" id="btn-submit" name="btn-submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 btn-submit">Post comment</button>
+                    
                     </div>
             </div>
         </div>
