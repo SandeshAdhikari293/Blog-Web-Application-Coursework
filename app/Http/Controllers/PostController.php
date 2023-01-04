@@ -93,7 +93,41 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', ['post' => $post]);       
+    }
+
+    public function store_edit(Request $request, $id)
+    {
+
+        
+        $post = Post::findOrFail($id);
+        //dd($request);
+        $validatedData = $request->validate([
+            'title' => 'required|max:16',
+            'content' => 'required|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'] . " \n[edited]";
+        $post->user_id = \Auth::user()->id;
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            $request->image->move(public_path('image'), $filename);
+
+            $post->image = $filename;
+        };
+
+        $post->update();
+
+        session()->flash('message', 'Post was edited');
+
+        return redirect()->route('posts.show', ['id' => $id, 'page' => 1]);        
+        // return view('posts.edit', ['post' => $post]);       
     }
 
     /**
