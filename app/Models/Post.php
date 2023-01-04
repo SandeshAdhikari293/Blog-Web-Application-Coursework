@@ -9,6 +9,17 @@ class Post extends Model
 {
     use HasFactory;
 
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function latestImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')->latestOfMany();
+    }
+
     /**
      * Query the user that created this post.
      */
