@@ -40,6 +40,9 @@ Route::post('/posts/edit/{id}/store', [PostController::class, 'store_edit'])->na
 Route::get('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comments.edit');
 Route::post('/comment/edit/{id}/store', [CommentController::class, 'update'])->name('comments.edit.store');
 
+Route::post('/users/admin/make/{id}', [UserController::class, 'make_admin'])->name('users.admin.make');
+Route::post('/users/admin/remove/{id}', [UserController::class, 'remove_admin'])->name('users.admin.remove');
+
 Route::post('/posts/store', [PostController::class, 'store'])->name("posts.store");
 Route::post('/users/profile/store', [UserController::class, 'store_profile'])->name("users.profile.store");
 

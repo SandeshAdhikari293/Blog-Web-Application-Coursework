@@ -26,7 +26,15 @@
             </div>
                 
                 <div class="mt-16">
+                @if($user->is_admin)
+                        <h1 class="font-bold text-center text-3xl text-red-900">{{$user->name}}</h1>
+                        <p class="text-center text-sm text-red-400 font-medium">Administrator</p>
+
+                    @else
                     <h1 class="font-bold text-center text-3xl text-gray-900">{{$user->name}}</h1>
+
+                    @endif
+
                     <p class="text-center text-sm text-gray-400 font-medium">{{$user->profile->bio}}</p>
                     <br>
                     <p class="text-center text-sm text-gray-400 font-medium">{{$user->profile->job}}</p>
@@ -42,8 +50,6 @@
                     <div class="flex justify-between items-center my-5 px-6">
                         <a href="" class="text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition duration-150 ease-in font-medium text-sm text-center w-full py-3">{{$user->email}}</a>
                     </div>
-
-        
                 </div>
             </div>
 

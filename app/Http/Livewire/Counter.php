@@ -14,24 +14,23 @@ class Counter extends Component
     public $page = 1;
     public $comment_per_page = 3;
     public $upvotes;
-    public $edit_comment;
 
     public function post(){
         // dd($this->pid);
-        $comment = new Comment;
-        $comment->post_id = $this->post->id;
-        $comment->text = $this->input;
-        $comment->user_id = \Auth::user()->id;
+        if(trim($this->input) != ""){
+            $comment = new Comment;
+            $comment->post_id = $this->post->id;
+            $comment->text = $this->input;
+            $comment->user_id = \Auth::user()->id;
 
-        $comment->save();
-        $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
+            $comment->save();
+            $comment->post->user->notify(new NewComment( \Auth::user(), $comment->post, $comment));
 
-        $this->post = $comment->post;
-        $this->page = count($this->post->comments) / $this->comment_per_page;
-    }
+            $this->post = $comment->post;
+            $this->page = count($this->post->comments) / $this->comment_per_page;
 
-    public function edit(){
-
+            $this->input = "";
+        }
     }
 
     public function upvote(){

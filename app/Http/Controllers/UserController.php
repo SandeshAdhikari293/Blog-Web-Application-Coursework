@@ -113,4 +113,21 @@ class UserController extends Controller
         return redirect()->route('users.index', ['page' => 1])->with('message', 'User was deleted!');
     }
 
+    public function make_admin($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_admin = 1;
+        $user->update();
+
+        return redirect()->route('users.show', ['id' => $id, 'cpage' => 1, 'ppage' => 1]);
+    }
+
+    public function remove_admin($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_admin = 0;
+        $user->update();
+
+        return redirect()->route('users.show', ['id' => $id, 'cpage' => 1, 'ppage' => 1]);
+    }
 }
