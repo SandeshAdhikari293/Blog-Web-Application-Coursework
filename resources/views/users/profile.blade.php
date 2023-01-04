@@ -1,17 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Profile')
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 @vite('resources/css/app.css')
 @section('content')
-    @php
-        $posts_per_page = 3;
-        $count = 0;
-    @endphp
-        @foreach ($users as $user)
-            @if($count < $page * $posts_per_page && $count > ($page * $posts_per_page) - ($posts_per_page + 1) )
-            <div class="container mx-auto my-60">
+<body class="bg-gray-300 antialiased">
+    <div class="container mx-auto my-60">
         <div>
 
             <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
@@ -43,23 +38,6 @@
 
         </div>
     </div>
-
-            @endif
-            @php
-                $count = $count + 1;
-            @endphp
-
-        @endforeach
-        <div class="inline-flex">
-            @if($page > 1)
-                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-                    <a href="{{route('users.index', ['page' => $page - 1])}}">Prev</a>
-                </button>
-            @endif
-            @if($page < count($users) / $posts_per_page)
-                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
-                    <a href="{{route('users.index', ['page' => $page + 1])}}">Next</a>
-                </button> 
-            @endif
-        </div>
+</body>
+</html>
 @endsection

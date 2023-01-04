@@ -27,11 +27,14 @@ class UserTableSeeder extends Seeder
         $p = new Profile;
         $p->user_id = $u->id;
         $p->bio = "Hello everyone!";
+        $p->job = "Bin man";
+        $p->dob = new \DateTime();
+
         $p->save();
 
         
 
         //Create 50 instances of fake data in the database.
-        User::factory()->count(50)->create();
+        User::factory()->count(50)->has(Profile::factory()->count(1))->create();
     }
 }

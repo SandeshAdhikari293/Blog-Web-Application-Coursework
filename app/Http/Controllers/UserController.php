@@ -31,6 +31,11 @@ class UserController extends Controller
         //
     }
 
+    public function profile($id){
+        $user = User::findOrFail($id);
+        return view('users.profile', ['user' => $user]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

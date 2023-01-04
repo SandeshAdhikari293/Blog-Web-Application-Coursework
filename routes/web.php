@@ -28,6 +28,7 @@ Route::post('comments/{id}', [CommentController::class, 'store'])->name('comment
 
 Route::get('/users/{id}/page/{ppage}/{cpage}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/page/{page}', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/profile/{id}', [UserController::class, 'profile'])->name('users.profile');
 
 
 
