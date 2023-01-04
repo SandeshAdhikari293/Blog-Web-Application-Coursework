@@ -25,7 +25,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('users.show', ['id' => auth()->user()->id, 'ppage' => 1, 'cpage' => 1] )" :active="request()->routeIs('posts.users')">
-                        {{ __('My Posts') }}
+                        {{ __('My Profile') }}
                     </x-nav-link>
                 </div>
 
