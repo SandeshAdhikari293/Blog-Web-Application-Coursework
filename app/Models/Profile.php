@@ -13,7 +13,7 @@ class Profile extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

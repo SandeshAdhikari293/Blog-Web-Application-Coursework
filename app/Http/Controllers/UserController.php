@@ -76,7 +76,9 @@ class UserController extends Controller
 
             $request->image->move(public_path('image'), $filename);
 
-            $p->avatar = $filename;
+            // $p->avatar = $filename;
+
+            $p->image()->create(['imageable_id' => $p->id, 'url' => $filename]);
         };
         $p->update();
 

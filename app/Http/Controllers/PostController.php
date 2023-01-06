@@ -53,7 +53,9 @@ class PostController extends Controller
 
             $request->image->move(public_path('image'), $filename);
 
-            $post->image = $filename;
+            $post->save();
+
+            $post->image()->create(['imageable_id' => $post->id, 'url' => $filename]);
         };
 
         $post->save();
@@ -119,7 +121,9 @@ class PostController extends Controller
 
             $request->image->move(public_path('image'), $filename);
 
-            $post->image = $filename;
+            // $post->image = $filename;
+            $post->image()->create(['imageable_id' => $post->id, 'url' => $filename]);
+
         };
 
         $post->update();

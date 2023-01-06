@@ -19,9 +19,11 @@
 
                 <div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-8 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
                 <div class="flex items-start px-4 py-6">
-                        @if($post->image != "")
-                            <img width="200" height = "200" src="{{ url('image/'. $post->image) }}" alt="">
+                    @if($post->image != null)
+                        @if($post->image->url != "")
+                            <img width="200" height = "200" src="{{ url('image/'. $post->image->url) }}" alt="">
                         @endif
+                    @endif
                     <div class="">
                         <div class="flex items-center justify-between">
                             <h2 class="text-lg font-semibold text-gray-900 -mt-1"> <a href=" {{route('posts.show', ['id' => $post->id, 'page' => 1]) }}">{{$post->title}}</a></h2>
