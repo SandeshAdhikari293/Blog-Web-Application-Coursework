@@ -99,10 +99,15 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);       
     }
 
-    public function store_edit(Request $request, $id)
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-
-        
         $post = Post::findOrFail($id);
         //dd($request);
         $validatedData = $request->validate([
@@ -132,18 +137,6 @@ class PostController extends Controller
 
         return redirect()->route('posts.show', ['id' => $id, 'page' => 1]);        
         // return view('posts.edit', ['post' => $post]);       
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

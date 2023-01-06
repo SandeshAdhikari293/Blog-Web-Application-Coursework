@@ -35,7 +35,7 @@ Route::get('/users/profile/{id}', [UserController::class, 'profile'])->name('use
 Route::get('/posts/page/{page}', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
-Route::post('/posts/edit/{id}/store', [PostController::class, 'store_edit'])->name('posts.edit.store');
+Route::post('/posts/edit/{id}/store', [PostController::class, 'update'])->name('posts.edit.store');
 
 Route::get('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comments.edit');
 Route::post('/comment/edit/{id}/store', [CommentController::class, 'update'])->name('comments.edit.store');
