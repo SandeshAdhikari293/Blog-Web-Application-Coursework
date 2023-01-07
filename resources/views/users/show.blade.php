@@ -63,7 +63,7 @@
                 <!-- <input type="submit" value="Submit"> -->
                 
                 <div class="">
-                    <form class= "flex justify-center" method="POST" action="{{ route('users.profile.store') }}" enctype="multipart/form-data">
+                    <form class= "flex justify-center" method="POST" action="{{ route('users.profile.store', ['id' => $user->id]) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
                             <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Update your bio..</label>

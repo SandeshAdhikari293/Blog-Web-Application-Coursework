@@ -41,13 +41,14 @@ class UserController extends Controller
         return view('users.profile', ['user' => $user]);
     }
 
-    public function store_profile(Request $request){
+    public function store_profile(Request $request, $id){
         // dd($request);
 
-        $user = \Auth::user();
+        $user = User::findOrFail($id);
+        
         if($user->profile == null){
             $profile = new Profile;
-            $profile->user_id = \Auth::user()->id;
+            $profile->user_id = $id;
             $profile->save();
             $user->profile = $profile;
 
@@ -63,11 +64,11 @@ class UserController extends Controller
         ]);
 
         
-        $p = \Auth::user()->profile;
+        $p = $user->profile;
         $p->bio = $validatedData['bio'];
         $p->job = $validatedData['job'];
         $p->dob = $validatedData['dob'];
-        $p->user_id = \Auth::user()->id;
+        $p->user_id = $user->id;
 
         
         if($request->hasFile('image')){
@@ -86,7 +87,7 @@ class UserController extends Controller
         session()->flash('message', 'Post was created');
 
 
-        return redirect()->route('users.show', ['id' => \Auth::user()->id, 'cpage' => 1, 'ppage' => 1]);
+        return redirect()->route('users.show', ['id' => $user->id, 'cpage' => 1, 'ppage' => 1]);
     }
 
     /**

@@ -35,26 +35,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        //Validate the data
         $validatedData = $request->validate([
             'title' => 'required|max:16',
             'content' => 'required|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
+        //Create a new post and store attributes in object
         $post = new Post;
         $post->title = $validatedData['title'];
         $post->content = $validatedData['content'];
         $post->user_id = \Auth::user()->id;
 
+        //Check if user uplaoded image
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
 
+            //Store image
             $request->image->move(public_path('image'), $filename);
 
             $post->save();
 
+            //Create polymorphic relation to the image
             $post->image()->create(['imageable_id' => $post->id, 'url' => $filename]);
         };
 
@@ -109,24 +113,28 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        //dd($request);
+
+        //Validate the data
         $validatedData = $request->validate([
             'title' => 'required|max:16',
             'content' => 'required|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
+        //Store validated attributes into post object
         $post->title = $validatedData['title'];
         $post->content = $validatedData['content'] . " \n[edited]";
-        $post->user_id = \Auth::user()->id;
+        // $post->user_id = \Auth::user()->id;
 
+        //Check if the user uploaded an image
         if($request->hasFile('image')){
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
 
+            //Store the image
             $request->image->move(public_path('image'), $filename);
 
-            // $post->image = $filename;
+            //Add a polymorphic relation for the image
             $post->image()->create(['imageable_id' => $post->id, 'url' => $filename]);
 
         };
@@ -136,7 +144,6 @@ class PostController extends Controller
         session()->flash('message', 'Post was edited');
 
         return redirect()->route('posts.show', ['id' => $id, 'page' => 1]);        
-        // return view('posts.edit', ['post' => $post]);       
     }
 
     /**

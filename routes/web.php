@@ -44,7 +44,7 @@ Route::post('/users/admin/make/{id}', [UserController::class, 'make_admin'])->na
 Route::post('/users/admin/remove/{id}', [UserController::class, 'remove_admin'])->name('users.admin.remove');
 
 Route::post('/posts/store', [PostController::class, 'store'])->name("posts.store");
-Route::post('/users/profile/store', [UserController::class, 'store_profile'])->name("users.profile.store");
+Route::post('/users/profile/store/{id}', [UserController::class, 'store_profile'])->name("users.profile.store");
 
 Route::get('/posts/{id}/page/{page}', [PostController::class, 'show'])->name("posts.show");
 
